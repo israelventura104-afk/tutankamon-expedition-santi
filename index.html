@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expedición KV62 | El Secreto de Tutankamón</title>
+    <title>Operación KV62 | Expedición Tutankamón</title>
     <style>
         :root {
             --navy: #011E41;
             --teal: #008285;
             --gold: #C09426;
-            --bg-dark: #0a1118;
-            --card-bg: #111e2d;
+            --bg-dark: #070d14;
+            --card-bg: #0f1a29;
             --text-light: #f4f6f8;
+            --accent-glow: rgba(0, 130, 133, 0.4);
         }
 
         * {
@@ -24,101 +25,163 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-light);
-            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 750px;
+            width: 100%;
         }
 
         header {
             text-align: center;
-            padding: 30px 20px;
+            padding: 20px 0;
+            margin-bottom: 20px;
             border-bottom: 2px solid var(--gold);
-            margin-bottom: 30px;
         }
 
         header h1 {
             color: var(--gold);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         header p {
-            color: #a0aec0;
-            font-size: 1.1rem;
+            color: #8899a6;
+            font-size: 0.95rem;
         }
 
-        .section-card {
+        /* Menú de Pestañas (Navegación sin scroll) */
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .nav-tabs {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .tab-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--teal);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            transition: transform 0.2s ease;
+            color: var(--text-light);
+            padding: 12px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .section-card:hover {
+        .tab-btn:hover {
             border-color: var(--gold);
+            background-color: rgba(0, 130, 133, 0.2);
         }
 
-        h2 {
-            color: var(--teal);
+        .tab-btn.active {
+            background-color: var(--teal);
+            border-color: var(--gold);
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Panel de Contenido */
+        .mission-panel {
+            background-color: var(--card-bg);
+            border: 2px solid var(--teal);
+            border-radius: 14px;
+            padding: 25px;
+            min-height: 320px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .mission-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mission-title {
+            color: var(--gold);
+            font-size: 1.3rem;
             margin-bottom: 15px;
-            font-size: 1.4rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px dashed var(--teal);
+            padding-bottom: 10px;
         }
 
-        p {
-            margin-bottom: 15px;
+        .mission-text {
             color: #d2d6dc;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
-        .interactive-box {
-            background: rgba(0, 130, 133, 0.1);
-            border-left: 4px solid var(--gold);
+        /* Elemento Interactivo dentro del panel */
+        .action-box {
+            background: rgba(1, 30, 65, 0.7);
+            border: 1px solid var(--gold);
             padding: 15px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 15px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s;
-        }
-
-        .interactive-box:hover {
-            background: rgba(0, 130, 133, 0.2);
-        }
-
-        .hidden-content {
-            display: none;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--teal);
-            color: #ffffff;
+            text-align: center;
             font-weight: 500;
+            color: var(--gold);
         }
 
-        .badge {
-            background-color: var(--gold);
-            color: var(--navy);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
+        .action-box:hover {
+            background: rgba(1, 30, 65, 1);
+        }
+
+        .reveal-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 130, 133, 0.15);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 8px 8px 0;
+            color: #ffffff;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        ul.relic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.relic-list li {
+            background: rgba(0, 130, 133, 0.1);
+            margin-bottom: 8px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 130, 133, 0.3);
+            font-size: 0.95rem;
         }
 
         footer {
+            margin-top: 30px;
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #718096;
-            font-size: 0.9rem;
-            border-top: 1px solid #1a2c42;
+            color: #556677;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -126,76 +189,95 @@
 
     <div class="container">
         <header>
-            <span class="badge">Expedición Confidencial</span>
+            <p>EXPEDICIÓN INTERNACIONAL</p>
             <h1>Operación KV62: Tutankamón</h1>
-            <p>Diario interactivo de excavación arqueológica</p>
         </header>
 
-        <!-- Módulo 1 -->
-        <div class="section-card">
-            <h2>🕯️ 1. El Gran Descubrimiento (Noviembre de 1922)</h2>
-            <p>Tras años de buscar sin éxito en el Valle de los Reyes, el arqueólogo Howard Carter por fin encontró el escalón que llevaba a una puerta sellada en el año 1922.</p>
-            <div class="interactive-box" onclick="toggleReveal('reveal1', this)">
-                👉 <strong>Haz clic para encender la vela y ver lo que Carter dijo al mirar por el agujero...</strong>
-                <div id="reveal1" class="hidden-content">
-                    "Metió una vela y su patrocinador, Lord Carnarvon, le preguntó ansioso: '¿Puedes ver algo?'. Carter respondió la frase más famosa de la historia: <em>'Sí, cosas maravillosas'</em>. ¡La tumba estaba intacta y llena de oro!"
-                </div>
+        <!-- Navegación por pestañas (Adiós al scroll aburrido) -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'tab1')">🕯️ El Hallazgo</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab2')">🗡️ El Tesoro</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab3')">🧬 El Faraón</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab4')">👻 La Maldición</button>
+        </div>
+
+        <!-- Panel 1 -->
+        <div id="tab1" class="mission-panel active">
+            <div class="mission-title">🕯️ Misión 1: La Puerta Sellada (1922)</div>
+            <div class="mission-text">
+                Tras años de buscar sin éxito en el árido Valle de los Reyes en Egipto, el arqueólogo Howard Carter estuvo a punto de rendirse... hasta que dio con un escalón oculto bajo las antiguas cabañas de los trabajadores.
+            </div>
+            <div class="action-box" onclick="toggleSecret('secret1')">
+                🔦 Toca para encender la linterna y ver qué había detrás de la puerta
+            </div>
+            <div id="secret1" class="reveal-box">
+                "Carter hizo un pequeño agujero en la puerta, metió una vela y asomó la vista. Su patrocinador, Lord Carnarvon, le preguntó ansioso: <em>'¿Puedes ver algo?'</em>. Carter respondió la frase más célebre de la historia: <strong>'Sí, cosas maravillosas'</strong>. ¡La tumba estaba intacta y repleta de tesoros dorados!"
             </div>
         </div>
 
-        <!-- Módulo 2 -->
-        <div class="section-card">
-            <h2>🗡️ 2. El Equipaje Más Extraño para el Más Allá</h2>
-            <p>Los faraones se llevaban objetos valiosos para su viaje eterno, pero lo que encontraron en la tumba de Tutankamón dejó sin palabras a los científicos.</p>
-            <div class="interactive-box" onclick="toggleReveal('reveal2', this)">
-                👉 <strong>Haz clic para inspeccionar los artefactos secretos de la tumba...</strong>
-                <div id="reveal2" class="hidden-content">
-                    <ul>
-                        <li><strong>La daga espacial:</strong> Tenían una daga de hierro... ¡creada con metal de un meteorito! En esa época el hierro valía más que el oro.</li>
-                        <li><strong>Juegos de mesa:</strong> Le dejaron varios tableros de <em>Senet</em> (el juego tradicional egipcio) para no aburrirse en la eternidad.</li>
-                        <li><strong>130 bastones:</strong> Tenía bastones de todo tipo porque caminaba con dificultad.</li>
-                    </ul>
-                </div>
+        <!-- Panel 2 -->
+        <div id="tab2" class="mission-panel">
+            <div class="mission-title">🗡️ Misión 2: Los Artefactos Más Raros</div>
+            <div class="mission-text">
+                Los faraones se llevaban pertenencias para su viaje eterno, pero lo que acompañaba a Tutankamón dejó a los científicos boquiabiertos. Selecciona los hallazgos insólitos:
+            </div>
+            <ul class="relic-list">
+                <li>✨ <strong>La Daga Espacial:</strong> Tenían una hoja de hierro... ¡forjada con el metal de un meteorito caído del cielo! (En esa época el hierro era más valioso que el oro).</li>
+                <li>🎲 <strong>Juegos de Mesa:</strong> Le dejaron varios tableros de <em>Senet</em> (el juego tradicional egipcio) para entretenerse en la eternidad.</li>
+                <li>🩼 <strong>130 Bastones:</strong> Encontraron más de un centenar de bastones de gala porque caminaba con dificultad.</li>
+            </ul>
+        </div>
+
+        <!-- Panel 3 -->
+        <div id="tab3" class="mission-panel">
+            <div class="mission-title">🧬 Misión 3: El Misterio del Faraón Joven</div>
+            <div class="mission-text">
+                Tutankamón gobernó siendo un niño y murió a una edad muy temprana (19 años). Durante décadas circularon teorías de conspiración sobre un asesinato.
+            </div>
+            <div class="action-box" onclick="toggleSecret('secret3')">
+                📂 Abrir el Expediente Médico Forense
+            </div>
+            <div id="secret3" class="reveal-box">
+                "Los escáneres modernos revelaron la verdad: no hubo asesinato. El faraón tenía una salud muy frágil, contrajo malaria (una infección grave por mosquitos) y sufrió una fractura severa en la pierna poco antes de morir. ¡Por eso necesitaba tantos bastones!"
             </div>
         </div>
 
-        <!-- Módulo 3 -->
-        <div class="section-card">
-            <h2>🧬 3. El Misterio del Faraón Joven</h2>
-            <p>Tutankamón gobernó siendo un niño y murió a los 19 años. Durante mucho tiempo se creyó que fue asesinado, pero la ciencia moderna reveló la verdad.</p>
-            <div class="interactive-box" onclick="toggleReveal('reveal3', this)">
-                👉 <strong>Haz clic para abrir el Expediente Médico del Faraón...</strong>
-                <div id="reveal3" class="hidden-content">
-                    "Los estudios revelaron que tenía una salud muy frágil, sufría de malaria (una enfermedad transmitida por mosquitos) y se había roto una pierna poco antes de morir. ¡Por esa razón acumuló tantos bastones en su tumba!"
-                </div>
+        <!-- Panel 4 -->
+        <div id="tab4" class="mission-panel">
+            <div class="mission-title">👻 Misión 4: ¿Mito o Realidad de la Maldición?</div>
+            <div class="mission-text">
+                Cuando abrieron la tumba en 1922, los periódicos de todo el mundo armaron un escándalo gigantesco asegurando que una maldición milenaria mataría a todos los intrusos.
             </div>
-        </div>
-
-        <!-- Módulo 4 -->
-        <div class="section-card">
-            <h2>👻 4. La Famosa Maldición: ¿Mito o Realidad?</h2>
-            <p>Los periódicos de 1922 armaron un escándalo asegurando que una maldición mataría a todos los que se atrevieran a entrar a la tumba del faraón.</p>
-            <div class="interactive-box" onclick="toggleReveal('reveal4', this)">
-                👉 <strong>Haz clic para descubrir la verdad detrás del misterio...</strong>
-                <div id="reveal4" class="hidden-content">
-                    "¡Es puramente mito y sensacionalismo de la prensa! Aunque el patrocinador murió poco después por la picadura de un mosquito infectado, la gran mayoría de los arqueólogos y científicos que entraron vivieron muchos años más tranquilos y felices."
-                </div>
+            <div class="action-box" onclick="toggleSecret('secret4')">
+                🔍 Revelar la Verdad de los Periódicos
+            </div>
+            <div id="secret4" class="reveal-box">
+                "¡Todo fue un invento de la prensa para vender más diarios! Aunque el patrocinador murió poco después por la picadura de un mosquito infectado, la gran mayoría de los arqueólogos y científicos que entraron a la tumba vivieron muchos años más tranquilos y felices."
             </div>
         </div>
 
         <footer>
-            <p>Diseñado con curiosidad y tecnología para futuros arqueólogos 🏛️✨</p>
+            <p>Learning & Development Studio • Experiencias de Aprendizaje Interactivo</p>
         </footer>
     </div>
 
     <script>
-        function toggleReveal(id, element) {
-            const content = document.getElementById(id);
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
+        function openTab(evt, tabId) {
+            const panels = document.getElementsByClassName('mission-panel');
+            for (let p of panels) {
+                p.classList.remove('active');
             }
+            const buttons = document.getElementsByClassName('tab-btn');
+            for (let b of buttons) {
+                b.classList.remove('active');
+            }
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        function toggleSecret(id) {
+            const box = document.getElementById(id);
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>
