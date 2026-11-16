@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedición KV62 | El Secreto de Tutankamón</title>
+    <style>
+        :root {
+            --navy: #011E41;
+            --teal: #008285;
+            --gold: #C09426;
+            --bg-dark: #0a1118;
+            --card-bg: #111e2d;
+            --text-light: #f4f6f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--teal);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .section-card:hover {
+            border-color: var(--gold);
+        }
+
+        h2 {
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #d2d6dc;
+        }
+
+        .interactive-box {
+            background: rgba(0, 130, 133, 0.1);
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .interactive-box:hover {
+            background: rgba(0, 130, 133, 0.2);
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--teal);
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #718096;
+            font-size: 0.9rem;
+            border-top: 1px solid #1a2c42;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="badge">Expedición Confidencial</span>
+            <h1>Operación KV62: Tutankamón</h1>
+            <p>Diario interactivo de excavación arqueológica</p>
+        </header>
+
+        <!-- Módulo 1 -->
+        <div class="section-card">
+            <h2>🕯️ 1. El Gran Descubrimiento (Noviembre de 1922)</h2>
+            <p>Tras años de buscar sin éxito en el Valle de los Reyes, el arqueólogo Howard Carter por fin encontró el escalón que llevaba a una puerta sellada en el año 1922.</p>
+            <div class="interactive-box" onclick="toggleReveal('reveal1', this)">
+                👉 <strong>Haz clic para encender la vela y ver lo que Carter dijo al mirar por el agujero...</strong>
+                <div id="reveal1" class="hidden-content">
+                    "Metió una vela y su patrocinador, Lord Carnarvon, le preguntó ansioso: '¿Puedes ver algo?'. Carter respondió la frase más famosa de la historia: <em>'Sí, cosas maravillosas'</em>. ¡La tumba estaba intacta y llena de oro!"
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="section-card">
+            <h2>🗡️ 2. El Equipaje Más Extraño para el Más Allá</h2>
+            <p>Los faraones se llevaban objetos valiosos para su viaje eterno, pero lo que encontraron en la tumba de Tutankamón dejó sin palabras a los científicos.</p>
+            <div class="interactive-box" onclick="toggleReveal('reveal2', this)">
+                👉 <strong>Haz clic para inspeccionar los artefactos secretos de la tumba...</strong>
+                <div id="reveal2" class="hidden-content">
+                    <ul>
+                        <li><strong>La daga espacial:</strong> Tenían una daga de hierro... ¡creada con metal de un meteorito! En esa época el hierro valía más que el oro.</li>
+                        <li><strong>Juegos de mesa:</strong> Le dejaron varios tableros de <em>Senet</em> (el juego tradicional egipcio) para no aburrirse en la eternidad.</li>
+                        <li><strong>130 bastones:</strong> Tenía bastones de todo tipo porque caminaba con dificultad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="section-card">
+            <h2>🧬 3. El Misterio del Faraón Joven</h2>
+            <p>Tutankamón gobernó siendo un niño y murió a los 19 años. Durante mucho tiempo se creyó que fue asesinado, pero la ciencia moderna reveló la verdad.</p>
+            <div class="interactive-box" onclick="toggleReveal('reveal3', this)">
+                👉 <strong>Haz clic para abrir el Expediente Médico del Faraón...</strong>
+                <div id="reveal3" class="hidden-content">
+                    "Los estudios revelaron que tenía una salud muy frágil, sufría de malaria (una enfermedad transmitida por mosquitos) y se había roto una pierna poco antes de morir. ¡Por esa razón acumuló tantos bastones en su tumba!"
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div class="section-card">
+            <h2>👻 4. La Famosa Maldición: ¿Mito o Realidad?</h2>
+            <p>Los periódicos de 1922 armaron un escándalo asegurando que una maldición mataría a todos los que se atrevieran a entrar a la tumba del faraón.</p>
+            <div class="interactive-box" onclick="toggleReveal('reveal4', this)">
+                👉 <strong>Haz clic para descubrir la verdad detrás del misterio...</strong>
+                <div id="reveal4" class="hidden-content">
+                    "¡Es puramente mito y sensacionalismo de la prensa! Aunque el patrocinador murió poco después por la picadura de un mosquito infectado, la gran mayoría de los arqueólogos y científicos que entraron vivieron muchos años más tranquilos y felices."
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Diseñado con curiosidad y tecnología para futuros arqueólogos 🏛️✨</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleReveal(id, element) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
